@@ -1,25 +1,22 @@
 pipeline {
-   agent any
+    agent any
 
- 
-
-   stages {
-      stage('Clone') {
-          steps{
-            sh "rm -rf mavenrepo"
-            sh "git clone https://github.com/skolar9/mavenrepo.git"
-            sh "mvn clean -f mavenrepo"
-          }
-      }
-      stage("Test"){
-          steps{
-              sh "mvn test -f mavenrepo"
-          }
-      }
-        stage("Deploy"){
-          steps{
-              sh "mvn package -f mavenrepo"
-          }
-      }
-   }
+    stages {
+        stage("Build master") {
+            when{
+                branch 'master'
+            }
+            steps {
+              echo 'building  master'
+            }
+        }
+         stage("Build dev") {
+              when{
+                branch 'dev'
+            }
+            steps {
+                echo 'building  dev'
+            }
+        }
+    }
 }
