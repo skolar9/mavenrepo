@@ -4,19 +4,10 @@ pipeline {
     stages {
         stage("Build master") {
             when{
-                branch 'master'
+                buildingTag()
             }
-            steps {
-              echo 'building  master'
-            }
-        }
-         stage("Build dev") {
-              when{
-                branch 'dev'
-            }
-            steps {
-                echo 'building  dev'
-            }
+            steps{
+                echo 'Hello world'
         }
     }
 }
